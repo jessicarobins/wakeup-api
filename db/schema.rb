@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170318195830) do
+ActiveRecord::Schema.define(version: 20170318173825) do
 
   create_table "stations", force: :cascade do |t|
     t.string   "name"
@@ -22,22 +22,6 @@ ActiveRecord::Schema.define(version: 20170318195830) do
     t.integer  "longitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "transaction_types", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "transactions", force: :cascade do |t|
-    t.integer  "transaction_type_id"
-    t.integer  "station_id"
-    t.datetime "time"
-    t.string   "bike_number"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
-    t.index ["bike_number", "time"], name: "index_transactions_on_bike_number_and_time", unique: true
   end
 
   create_table "trips", force: :cascade do |t|

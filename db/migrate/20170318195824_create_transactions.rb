@@ -8,7 +8,5 @@ class CreateTransactions < ActiveRecord::Migration[5.0]
       
       t.timestamps
     end
-    
-    add_index :transactions, [:bike_number, :time], unique: true
   end
 end
