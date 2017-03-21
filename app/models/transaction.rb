@@ -24,15 +24,11 @@ class Transaction < ApplicationRecord
         
         Transaction.create!(
           :station_id => station.id,
-          :time => format_time(:datetime => data[DATE])
+          :time => data[DATE].to_time
         )
         puts "transaction for #{data[DATE]} created"
       end
     end
   end
   
-  private
-    def self.format_time(datetime:)
-      DateTime.strptime(datetime, "%m/%d/%Y %k:%M")
-    end
 end
