@@ -10,7 +10,7 @@ class StationsController < ApplicationController
 
   # GET /stations/1
   def show
-    render json: @station
+    render json: @station.to_json(:methods => :median_last_bike)
   end
 
   # POST /stations

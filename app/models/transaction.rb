@@ -20,6 +20,7 @@ class Transaction < ApplicationRecord
       
       csv.each do |row|
         data = row.to_hash
+        puts "attempting transaction for #{data[STATION]}"
         
         station = Station.find_by!(
           :short_name => data[STATION])
@@ -28,7 +29,7 @@ class Transaction < ApplicationRecord
           :station_id => station.id,
           :time => data[DATE].to_time
         )
-        puts "transaction for #{data[DATE]} created"
+        
       end
     end
   end
