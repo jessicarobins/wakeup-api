@@ -5,16 +5,12 @@ class StationsController < ApplicationController
   def index
     @stations = Station.all
 
-    render json: @stations.includes(:transactions).to_json(
-      :methods => [
-        :median_last_bike,
-        :find_last_bike_by_day
-      ])
+    render json: @stations
   end
 
   # GET /stations/1
   def show
-    render json: @station.includes(:transactions).to_json(
+    render json: @station.to_json(
       :methods => [
         :median_last_bike,
         :find_last_bike_by_day
