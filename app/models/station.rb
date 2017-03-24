@@ -9,11 +9,14 @@ class Station < ApplicationRecord
       .map do |key, value|
         Transaction.find_last_bike(value)
       end
-      .map(&:time)
+      
   end
   
   def median_last_bike
-    day_array = find_last_bike_by_day.median.try(:round)
+    day_array = find_last_bike_by_day
+      .map(&:only_time)
+      .median
+      .try(:round)
   end
   
 end
