@@ -14,7 +14,7 @@ class TransactionsCollection
     transactions
       .group_by(&:day)
       .map do |key, value|
-        new(value).find_last_bike
+        TransactionsCollection.new(value).find_last_bike
       end
       .compact
   end
@@ -31,7 +31,7 @@ class TransactionsCollection
     end
     
     if (NINE_THIRTY_AM - transactions.last.only_time > max_difference)
-      last_bike = collection.last
+      last_bike = transactions.last
       max_difference = NINE_THIRTY_AM - transactions.last.only_time
     end
     

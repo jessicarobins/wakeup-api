@@ -10,9 +10,6 @@ class Transaction < ApplicationRecord
   DATE = "Start_date"
   STATION = "Start_station_number"
   
-  NINE_THIRTY_AM = 93000
-  DIFF_THRESHOLD = 1000 #10 min
-  
   def self.import(file:)
      
     ActiveRecord::Base.transaction do
@@ -33,29 +30,6 @@ class Transaction < ApplicationRecord
         
       end
     end
-  end
-  
-  def self.find_last_bike(collection)
-    last_bike = collection.first
-    max_difference = 0
-    
-    collection.each_cons(2) do |a,b|
-      if (b.only_time-a.only_time > max_difference)
-        last_bike = a
-        max_difference = b.only_time-a.only_time
-      end
-    end
-    
-    if (NINE_THIRTY_AM - collection.last.only_time > max_difference)
-      last_bike = collection.last
-      max_difference = NINE_THIRTY_AM - collection.last.only_time
-    end
-    
-    if (max_difference > DIFF_THRESHOLD)
-      return last_bike
-    end
-    
-    nil
   end
   
   def day

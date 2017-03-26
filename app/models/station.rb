@@ -6,12 +6,7 @@ class Station < ApplicationRecord
   validates_uniqueness_of :route_name
   
   def find_last_bike_by_day
-    transactions
-      .group_by(&:day)
-      .map do |key, value|
-        Transaction.find_last_bike(value)
-      end
-      .compact
+    TransactionsCollection.new(transactions).find_last_bike_by_day
   end
   
   def statistics
