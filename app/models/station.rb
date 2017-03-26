@@ -3,8 +3,8 @@ class Station < ApplicationRecord
   
   validates_uniqueness_of :route_name
   
-  def find_last_bike_by_day
-    TransactionsCollection.new(transactions).find_last_bike_by_day
+  def last_bike_times
+    TransactionsCollection.new(transactions).find_last_bike_by_day.pluck(:time)
   end
   
   def statistics
