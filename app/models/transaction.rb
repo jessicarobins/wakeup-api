@@ -11,6 +11,7 @@ class Transaction < ApplicationRecord
   STATION = "Start_station_number"
   
   NINE_THIRTY_AM = 93000
+  DIFF_THRESHOLD = 1000 #10 min
   
   def self.import(file:)
      
@@ -47,9 +48,14 @@ class Transaction < ApplicationRecord
     
     if (NINE_THIRTY_AM - collection.last.only_time > max_difference)
       last_bike = collection.last
+      max_difference = NINE_THIRTY_AM - collection.last.only_time
     end
     
-    last_bike
+    if (max_difference > DIFF_THRESHOLD)
+      return last_bike
+    end
+    
+    nil
   end
   
   def day
