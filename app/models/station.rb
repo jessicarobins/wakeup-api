@@ -19,4 +19,19 @@ class Station < ApplicationRecord
       .try(:round)
   end
   
+  def route_from_name
+    # split on the / because we don't want that. use the
+    # first part of the name because why not
+    s = name.split("\/").first
+    # we don't want & either so replace that with.. something
+    # maybe the word 'and'
+    s.gsub!(/&/, 'and')
+    # remove all spaces and replace with.. nothing? or -?
+    s.gsub!(/ /, '')
+    #downcase, for good measure
+    s.downcase!
+    
+    s
+  end
+  
 end
