@@ -20,7 +20,7 @@ class StationsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_station
-      @station = Station.find(params[:id])
+      @station = Station.find_by!(:route_name => params[:route_name])
     end
 
     # Only allow a trusted parameter "white list" through.
