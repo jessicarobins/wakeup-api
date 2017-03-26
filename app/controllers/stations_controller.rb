@@ -12,8 +12,7 @@ class StationsController < ApplicationController
   def show
     render json: @station.to_json(
       :methods => [
-        :median_last_bike,
-        :find_last_bike_by_day
+        :statistics
       ])
   end
 
@@ -22,8 +21,7 @@ class StationsController < ApplicationController
     
     render json: @station.to_json(
       :methods => [
-        :median_last_bike,
-        :find_last_bike_by_day
+        :statistics
       ])
   end
 

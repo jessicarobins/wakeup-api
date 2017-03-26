@@ -1,5 +1,3 @@
-require 'descriptive_statistics'
-
 class Station < ApplicationRecord
   has_many :transactions
   

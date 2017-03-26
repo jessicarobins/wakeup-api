@@ -1,4 +1,5 @@
 require 'descriptive_statistics'
+require 'savanna-outliers'
 
 class TransactionsCollection
   attr_reader :transactions
@@ -27,6 +28,10 @@ class TransactionsCollection
         .map(&:time)
         .map{|t| t.change(:month => 1, :day => 1, :year => 2000)}
         .map(&:seconds_since_midnight)
+        
+      outliers = Savanna::Outliers.get_outliers(stats, :all)
+      
+      stats = Savanna::Outliers.remove_outliers(stats, :all)
         .descriptive_statistics
         
       return {
@@ -37,7 +42,8 @@ class TransactionsCollection
         q1: format_time(stats[:q1]),
         q3: format_time(stats[:q3]),
         min: format_time(stats[:min]),
-        max: format_time(stats[:max])
+        max: format_time(stats[:max]),
+        outliers: outliers.map{|o| format_time o.round }
       }
     end
     
